@@ -1,0 +1,9 @@
+.git
+.gitignore
+.npmignore
+.redcar
+.travis.yml
+chrome
+node_modules
+spec
+web

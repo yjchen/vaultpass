@@ -1,0 +1,36 @@
+{ "name"            : "vault"
+, "description"     : "Generates safe passwords for the web"
+, "homepage"        : "https://getvau.lt/"
+, "author"          : "James Coglan <jcoglan@gmail.com> (http://jcoglan.com/)"
+, "keywords"        : ["security", "passwords"]
+
+, "version"         : "0.3.0"
+, "engines"         : {"node": ">=0.4.0"}
+, "main"            : "./lib/vault.js"
+, "bin"             : {"vault": "./bin/vault"}
+, "preferGlobal"    : true
+
+, "dependencies"    : { "posix-argv-parser": "~0.4.2"
+                      , "pw": "~0.0.4"
+                      , "ssh-agent": "~0.2.1"
+                      , "vault-cipher": "~0.3.0"
+                      }
+, "devDependencies" : { "jsclass": "" }
+
+, "scripts"         : { "postinstall" : "./node/scripts/postinstall"
+                      , "test"        : "node spec/node.js"
+                      }
+
+, "bugs"            : "http://github.com/jcoglan/vault/issues"
+
+, "licenses"        : [ { "type"  : "MIT"
+                        , "url"   : "http://www.opensource.org/licenses/mit-license.php"
+                        }
+                      ]
+
+, "repositories"    : [ { "type"  : "git"
+                        , "url"   : "git://github.com/jcoglan/vault.git"
+                        }
+                      ]
+}
+
