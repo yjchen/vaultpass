@@ -2,79 +2,11 @@
 <html>
   <head>
     <title>Hashpass</title>
-    <style type="text/css">
-      html {
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: sans-serif;
-        font-size: 0.9em;
-        color: #333;
-      }
-
-      #container {
-        width: 332px;
-        zoom: 1;
-      }
-
-      #container:before {
-        content: ' ';
-        display: table;
-        font-size: 0;
-        visibility: hidden;
-      }
-
-      #container:after {
-        content: ' ';
-        display: table;
-        font-size: 0;
-        visibility: hidden;
-        clear: both;
-      }
-
-      input {
-        display: block;
-        box-sizing: border-box;
-        width: 300px;
-        height: 40px;
-        border: 2px solid #ddd;
-        border-radius: 2px;
-        padding: 8px 12px;
-        outline-style: none;
-        line-height: 20px;
-        font-size: 1.2em;
-      }
-
-      input:focus {
-        border-color: #f872ae;
-      }
-
-      input, p {
-        margin: 16px;
-      }
-
-      .small-top-margin {
-        margin-top: 4px;
-      }
-
-      .small-bottom-margin {
-        margin-bottom: 4px;
-      }
-
-      #error {
-        color: #c00;
-      }
-
-      .hidden {
-        display: none;
-      }
-    </style>
+    <link href="vaultpass.css" rel="stylesheet">
+    <link href="lib/square/red.css" rel="stylesheet">
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="lib/crypto-js-3.1.2.js"></script>
+    <script type="text/javascript" src="lib/icheck.min.js"></script>
     <script type="text/javascript" src="lib/vault.js"></script>
     <script type="text/javascript" src="popup.js"></script>
   </head>
@@ -82,13 +14,36 @@
     <div id="container" class="hidden">
       <p id="error"></p>
       <div id="controls">
-        <p>Domain: <strong><span id="domain"></span></strong></p>
+        <p class="small-bottom-margin">Domain:</p>
+        <input id="domain" class="small-top-margin" type="text" />
         <p class="small-bottom-margin">Key:</p>
         <input id="key" class="small-top-margin" type="password" />
         <p class="small-bottom-margin password-mode-off">Hash:</p>
         <input id="hash" class="small-top-margin password-mode-off" type="text" readonly="true" />
         <p class="fill-instruction password-mode-on">Press <strong>ENTER</strong> to fill in the password field.</p>
         <p class="pre-instruction password-mode-off"><strong>TIP:</strong> Select a password field first.</p>
+        <ul>
+          <li class="small-top-margin">
+            <input type="radio" name="password_choice" id="password_choice_16" checked>
+            <label for="password_choice_16">16 letters, numbers & symbols</label>
+          </li>
+          <li class="small-top-margin">
+            <input type="radio" name="password_choice" id="password_choice_12">
+            <label for="password_choice_12">12 letters, numbers & symbols</label>
+          </li>
+          <li class="small-top-margin">
+            <input type="radio" name="password_choice" id="password_choice_10">
+            <label for="password_choice_10">10 letters & numbers</label>
+          </li>
+          <li class="small-top-margin">
+            <input type="radio" name="password_choice" id="password_choice_8">
+            <label for="password_choice_8">8 numbers</label>
+          </li>
+          <li class="small-top-margin">
+            <input type="radio" name="password_choice" id="password_choice_30">
+            <label for="password_choice_30">30 letters, numbers & symbols</label>
+          </li>
+        </ul>
       </div>
     </div>
   </body>

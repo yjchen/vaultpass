@@ -1,9 +1,5 @@
 "use strict";
 
-// The hashing difficulty.
-// 2 ^ difficulty rounds of SHA-256 will be computed.
-var difficulty = 16;
-
 // This fixes a bug in Chrome where the popup is not sized correctly.
 function fixSize() {
   setInterval(function() {
@@ -13,6 +9,61 @@ function fixSize() {
     $('#container').height(height);
   }, 100);
 }
+
+var password_choice_16 = {
+  length: 16,
+  repeat: 2,
+  lower: 2,
+  upper: 2,
+  number: 2,
+  dash: 2,
+  space: 0,
+  symbol: 2
+};
+
+var password_choice_12 = {
+  length: 12,
+  repeat: 2,
+  lower: 2,
+  upper: 2,
+  number: 2,
+  dash: 2,
+  space: 0,
+  symbol: 2
+};
+
+var password_choice_30 = {
+  length: 30,
+  repeat: 2,
+  lower: 2,
+  upper: 2,
+  number: 2,
+  dash: 2,
+  space: 0,
+  symbol: 2
+};
+
+var password_choice_10 = {
+  length: 10,
+  repeat: 2,
+  lower: 2,
+  upper: 2,
+  number: 2,
+  dash: 0,
+  space: 0,
+  symbol: 0
+};
+
+var password_choice_8 = {
+  length: 8,
+  repeat: 2,
+  lower: 0,
+  upper: 0,
+  number: 2,
+  dash: 0,
+  space: 0,
+  symbol: 0
+};
 
 $(function() {
   // Get the current tab.
@@ -50,7 +101,9 @@ $(function() {
         fixSize();
         return;
       }
-      $('#domain').text(domain);
+      $('#domain').val(domain);
+      
+
 
       // Run the content script to register the message handler.
       chrome.tabs.executeScript(tabs[0].id, {
@@ -75,31 +128,26 @@ $(function() {
 
             // Called whenever the key changes.
             var update = function() {
-              // Compute the first 16 base64 characters of iterated-SHA-256(domain + '/' + key, 2 ^ difficulty).
+              var domain = $('#domain').val();
               var key = $('#key').val();
-              var settings  = {phrase: key, length: 16, repeat: 2}
-              settings['lower'] = 2;
-              settings['upper'] = 2;
-              settings['number'] = 2;
-              settings['dash'] = 1;
-              settings['space'] = 0;
-              settings['symbol'] = 2;
-/*
-              var rounds = Math.pow(2, difficulty);
-              var bits = domain + '/' + key;
-              for (var i = 0; i < rounds; i += 1) {
-                bits = sjcl.hash.sha256.hash(bits);
-              }
+              var choice = $('input[type=radio]:checked').attr('id');
+              var settings  = window[choice];
+              password_choice_16['phrase'] = key;
 
-              var hash = sjcl.codec.base64.fromBits(bits).slice(0, 16);
-*/
-              var hash = 'NOT_REAL_PASSWORD';
-              var hash = new Vault(settings).generate(domain + 'b2xc-dfw2-nxvd-1gdf');
-              console.log(Vault);
-              console.log(hash);
+              var hash = new Vault(settings).generate(domain);
               $('#hash').val(hash);
               return hash;
             };
+            
+            $('input').on('ifChecked', function(event){
+              update();
+            });
+            
+            $('input').iCheck({
+              checkboxClass: 'icheckbox_square-red',
+              radioClass: 'iradio_square-red',
+              increaseArea: '20%' // optional
+            });
 
             // A debounced version of update().
             var timeout = null;
@@ -135,6 +183,7 @@ $(function() {
             if (!passwordMode) {
               // Register the update handler.
               $('#key').bind('propertychange change click keyup input paste', debouncedUpdate);
+              $('#domain').bind('propertychange change click keyup input paste', debouncedUpdate);
             }
 
             // Update the hash right away.
