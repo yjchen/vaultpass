@@ -10,61 +10,6 @@ function fixSize() {
   }, 100);
 }
 
-var password_choice_16 = {
-  length: 16,
-  repeat: 2,
-  lower: 2,
-  upper: 2,
-  number: 2,
-  dash: 2,
-  space: 0,
-  symbol: 2
-};
-
-var password_choice_12 = {
-  length: 12,
-  repeat: 2,
-  lower: 2,
-  upper: 2,
-  number: 2,
-  dash: 2,
-  space: 0,
-  symbol: 2
-};
-
-var password_choice_30 = {
-  length: 30,
-  repeat: 2,
-  lower: 2,
-  upper: 2,
-  number: 2,
-  dash: 2,
-  space: 0,
-  symbol: 2
-};
-
-var password_choice_10 = {
-  length: 10,
-  repeat: 2,
-  lower: 2,
-  upper: 2,
-  number: 2,
-  dash: 0,
-  space: 0,
-  symbol: 0
-};
-
-var password_choice_8 = {
-  length: 8,
-  repeat: 2,
-  lower: 0,
-  upper: 0,
-  number: 2,
-  dash: 0,
-  space: 0,
-  symbol: 0
-};
-
 $(function() {
   // Get the current tab.
   chrome.tabs.query({
@@ -132,7 +77,7 @@ $(function() {
               var key = $('#key').val();
               var choice = $('input[type=radio]:checked').attr('id');
               var settings  = window[choice];
-              password_choice_16['phrase'] = key;
+              settings['phrase'] = key;
 
               var hash = new Vault(settings).generate(domain);
               $('#hash').val(hash);
@@ -147,6 +92,10 @@ $(function() {
               checkboxClass: 'icheckbox_square-red',
               radioClass: 'iradio_square-red',
               increaseArea: '20%' // optional
+            });
+
+            $('#hash').focus(function(event_details) {
+              $(this).select();
             });
 
             // A debounced version of update().

@@ -1,3 +1,58 @@
+var password_choice_16 = {
+  length: 16,
+  repeat: 2,
+  lower: 2,
+  upper: 2,
+  number: 2,
+  dash: 2,
+  space: 0,
+  symbol: 2
+};
+
+var password_choice_12 = {
+  length: 12,
+  repeat: 2,
+  lower: 2,
+  upper: 2,
+  number: 2,
+  dash: 2,
+  space: 0,
+  symbol: 2
+};
+
+var password_choice_30 = {
+  length: 30,
+  repeat: 2,
+  lower: 2,
+  upper: 2,
+  number: 2,
+  dash: 2,
+  space: 0,
+  symbol: 2
+};
+
+var password_choice_10 = {
+  length: 10,
+  repeat: 2,
+  lower: 2,
+  upper: 2,
+  number: 2,
+  dash: 0,
+  space: 0,
+  symbol: 0
+};
+
+var password_choice_8 = {
+  length: 8,
+  repeat: 2,
+  lower: 0,
+  upper: 0,
+  number: 2,
+  dash: 0,
+  space: 0,
+  symbol: 0
+};
+
 var Vault = function(settings) {
   this._phrase   = settings.phrase || '';
   this._length   = settings.length || Vault.DEFAULT_LENGTH;
