@@ -74,7 +74,7 @@ var Vault = function(settings) {
   while (n >= 0 && n--) this._required.push(this._allowed);
 };
 
-Vault.UUID = 'e87eb0f4-34cb-46b9-93ad-766c5ab063e7';
+Vault.UUID = '57965353-78a2-44dd-851c-6f9c95590b4c';
 Vault.DEFAULT_LENGTH = 20;
 Vault.DEFAULT_REPEAT = 0;
 
@@ -102,7 +102,7 @@ Vault.createHash = function(key, message, entropy) {
   var CJS   = (typeof CryptoJS !== 'undefined') ? CryptoJS : require('./crypto-js-3.1.2'),
       bytes = (entropy || 256) / 8;
 
-  return CJS.PBKDF2(key, message, {keySize: Math.ceil(bytes / 4), iterations: 8}).toString();
+  return CJS.PBKDF2(CJS.SHA1(key), message, {keySize: Math.ceil(bytes / 4), iterations: 128}).toString();
 };
 
 Vault.indexOf = function(list, item) {

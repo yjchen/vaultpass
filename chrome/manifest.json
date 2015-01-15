@@ -3,7 +3,7 @@
 
   "name": "Vaultpass",
   "description": "A stateless password generator for Chrome.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "permissions": [
     "tabs",
     "http://*/*",
