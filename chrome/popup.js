@@ -41,7 +41,7 @@ $(function() {
       if (/^http(?:s?):\/\/chrome\.google\.com\/webstore.*/.test(tabs[0].url)) {
         // Technical reason: Chrome prevents content scripts from running in the app gallery.
         $('#controls').addClass('hidden');
-        $('#error').removeClass('hidden').text('Hashpass cannot run in the Chrome Web Store.');
+        $('#error').removeClass('hidden').text('Vaultpass cannot run in the Chrome Web Store.');
         $('#container').removeClass('hidden');
         fixSize();
         return;
